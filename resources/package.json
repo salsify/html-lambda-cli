@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/salsify/html-lambda#readme",
   "dependencies": {
-    "html-lambda-runner": "/Users/cameron/projects/html-lambda-runner"
+    "html-lambda-runner": "git+https://github.com/salsify/html-lambda-runner.git"
   }
 }
