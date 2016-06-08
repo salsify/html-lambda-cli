@@ -11,7 +11,7 @@ let lib = (file) => {
 	let curModule = Object.keys(require.cache)[0];
 
 	if (!file) return path.dirname(curModule);
-	return path.join(path.dirname(curModule, file));
+	return path.join(path.dirname(curModule, file), file);
 }
 
 module.exports = {
