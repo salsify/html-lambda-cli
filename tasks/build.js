@@ -53,7 +53,7 @@ let collectSource = async (() => {
 });
 
 function processSASS() {
-  let rawSASS = fs.readFileSync('style.scss').toString();
+  let rawSASS = fs.readFileSync(paths.project('style.scss')).toString();
 
   let processed = sass.renderSync({
     file: 'style.scss'
