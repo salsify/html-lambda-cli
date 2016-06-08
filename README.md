@@ -8,10 +8,22 @@ While Amazon's Lambda functions aren't hard to make, making lot's of them is a t
 
 ```npm install -g html-lambda-cli```
 
+**Usage**
+
+`init` - Create the files needed for a new Lambda project in the current directory.
+
+`build` - Build the project source and bundle it into a zip file in the dist folder.
+
+`serve` - Preview the current Lambda by running a local server on `:3000`. Changes will be automatically built and get parameters will be passed.
+
+`deploy` - Runs `build` and then uploads the result to Amazon.
+
 **Make a Lambda**
 
 Most of the work you'll need to do for each function is merely setup on Amazon's end. While it looks like a lot, it's not a hard procedure. This assumes you've setup your local AWS credentials, if you haven't yet, skip to the section below.
 
+1. Create a new folder for your project
+1. Run `html-lambda init` to create the needed files.
 1. Head over to the AWS console and open up Lambda.
 1. Click 'Create a Lambda function'.
 1. Click 'Skip' when asked to use a template.
