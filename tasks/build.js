@@ -44,7 +44,7 @@ let collectSource = async (() => {
 
   await (copy('index.html', 'tmp'));
   await (copy('index.js', 'tmp'));
-  await (copy('inject.js', 'tmp'));
+  await (copy('templateData.js', 'tmp'));
   await (copy('package.json', 'tmp'));
 
   await (copy('config/aws-config.json', 'tmp/config'));

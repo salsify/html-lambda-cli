@@ -18,8 +18,8 @@ module.exports = () => {
   logger.info('Generating', 'index.js');
   initFile('index.js');
 
-  logger.info('Generating', 'inject.js');
-  initFile('inject.js');
+  logger.info('Generating', 'templateData.js');
+  initFile('templateData.js');
 
   logger.info('Generating', 'style.scss');
   initFile('style.scss');
