@@ -1,7 +1,7 @@
 {
   "name": "html-lambda-cli",
   "version": "1.0.0",
-  "description": "A simple command line interface for [html-lambda-runner](https://github.com/salsify/html-lambda-runner).",
+  "description": "A simple command line interface for building HTML Lambda functions",
   "main": "index.js",
   "dependencies": {
     "autoprefixer": "^6.3.6",
