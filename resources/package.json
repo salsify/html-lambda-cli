@@ -7,7 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
-    "type": "git",
     "html-lambda-runner": "^1.0.0"
   },
   "author": "cwheel",
