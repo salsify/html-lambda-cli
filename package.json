@@ -20,6 +20,7 @@
     "html-lambda-runner": "git+https://github.com/salsify/html-lambda-runner.git",
     "node-sass": "^3.7.0",
     "postcss": "^5.0.21",
+    "tmp": "0.0.28",
     "zip-folder": "^1.0.0"
   }
 }

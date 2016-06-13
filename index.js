@@ -17,7 +17,7 @@ if (argIs(args[0], ['h', 'help'])) {
 	logger.helpEntry('Usage:', 'html-lambda <command>');
 
 	logger.empty();
-	logger.helpEntry('Available Commands:');
+	logger.helpEntry('Available Commands:', '');
 	logger.empty();
 
 	logger.helpEntry('init [i]:', 'Create a new project in the current directory.');
@@ -33,7 +33,11 @@ if (argIs(args[0], ['h', 'help'])) {
 } else if (argIs(args[0], ['d', 'deploy'])) {
 	timed.deploy();
 } else {
-	logger.info('Unrecognized argument:', args[0]);
+	if (!args[0]) {
+		logger.info('html-lambda', 'needs at least one argument. Run "html-lambda help" for help.');
+	} else {
+		logger.info('Unrecognized argument:', args[0]);
+	}
 }
 
 function argIs(arg, aliases) {

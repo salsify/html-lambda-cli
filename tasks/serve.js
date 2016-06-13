@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs');
+const tmp = require('tmp');
 const async = require('asyncawait/async');
 const await = require('asyncawait/await');
 const express = require('express');
@@ -12,17 +13,18 @@ const logger = require('../logger');
 
 module.exports = async (() => {
   let app = new express();
+  let temp = tmp.dirSync().name;
 
-  await (build.partial());
+  await (build.partial(temp));
 
   app.get('/', (req, res) => {
     logger.info('Processed', 'GET for lambda');
-    res.send(render(null, req.query, paths.project('tmp')));
+    res.send(render(null, req.query, temp));
   });
 
   fs.watch(paths.project(), {encoding: 'buffer'}, (event, filename) => {
     logger.info('File Changes', 'rebuilding sources...');
-    build.partial();
+    build.partial(temp);
   });
 
   app.listen(3000, () => {

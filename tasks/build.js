@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs-extra');
+const tmp = require('tmp');
 const path = require('path');
 const q = require('q');
 const sass = require('node-sass');
@@ -16,6 +17,7 @@ const paths = require('../paths');
 const logger = require('../logger');
 
 const buildName = 'build-' + Math.floor(Date.now() / 1000) + '.zip';
+let temp = tmp.dirSync().name;
 
 function makeFolder(folder) {
   if (!fs.existsSync(folder)) {
@@ -33,28 +35,25 @@ function copy(file, dest) {
 function installPackages() {
   let exec = q.denodeify(child.exec);
 
-  return exec('npm install --production --prefix tmp', { cwd: process.cwd() }).then((error, stdout, stderr) => {
+  return exec('npm install --production --prefix ' + temp, { cwd: process.cwd() }).then((error, stdout, stderr) => {
     logger.step('Finished npm install');
   });
 } 
 
 let collectSource = async (() => {
-  await (makeFolder('tmp'));
   await (makeFolder('config'));
 
-  await (copy('index.html', 'tmp'));
-  await (copy('index.js', 'tmp'));
-  await (copy('templateData.js', 'tmp'));
-  await (copy('package.json', 'tmp'));
+  await (copy('index.html', temp));
+  await (copy('index.js', temp));
+  await (copy('templateData.js', temp));
+  await (copy('package.json', temp));
 
-  await (copy('config/aws-config.json', 'tmp/config'));
+  await (copy('config/aws-config.json', path.join(temp, 'config')));
 
   logger.step('Finished collecting source');
 });
 
 function processSASS() {
-  let rawSASS = fs.readFileSync(paths.project('style.scss')).toString();
-
   let processed = sass.renderSync({
     file: 'style.scss'
   });
@@ -68,7 +67,7 @@ function processSASS() {
       logger.warning(warn.toString());
     });
 
-    fs.writeFileSync(paths.project('tmp/style.css'), result.css);
+    fs.writeFileSync(path.join(temp, 'style.css'), result.css);
     logger.step('Finished processing SASS');
   });
 }
@@ -85,7 +84,7 @@ function encryptConfig(awsConfig) {
   let encrypt = q.denodeify(kms.encrypt.bind(kms));
 
   return encrypt(params).then((data) => {
-    fs.writeFileSync(paths.project('tmp/config/config.json.enc'), data.CiphertextBlob);
+    fs.writeFileSync(path.join(temp, 'config/config.json.enc'), data.CiphertextBlob);
 
     logger.step('Finished encrypting config.json');
   });
@@ -97,12 +96,14 @@ let buildZip = async (() => {
 
   let zip = q.denodeify(zipFolder);
 
-  return zip('tmp', path.join('dist', buildName)).then(() => {
+  return zip(temp, path.join('dist', buildName)).then(() => {
     logger.step('Finished building zip file ' + buildName);
   });
 });
 
-let partialBuild = async (() => {
+let partialBuild = async ((_temp) => {
+  if (temp) temp = _temp;
+
   await (collectSource());
   await (installPackages());
   await (processSASS());
