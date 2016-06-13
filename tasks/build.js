@@ -102,7 +102,7 @@ let buildZip = async (() => {
 });
 
 let partialBuild = async ((_temp) => {
-  if (temp) temp = _temp;
+  if (_temp) temp = _temp;
 
   await (collectSource());
   await (installPackages());
