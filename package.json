@@ -1,26 +1,44 @@
 {
-  "name": "html-lambda",
+  "name": "html-lambda-cli",
   "version": "1.0.0",
-  "description": "Builds HTML generating Lambda's",
+  "description": "A simple command line interface for [html-lambda-runner](https://github.com/salsify/html-lambda-runner).",
+  "main": "index.js",
+  "dependencies": {
+    "autoprefixer": "^6.3.6",
+    "aws-sdk": "^2.3.17",
+    "colors": "^1.1.2",
+    "express": "^4.13.4",
+    "fs-extra": "^0.30.0",
+    "html-lambda-runner": "^1.0.0",
+    "node-sass": "^3.7.0",
+    "postcss": "^5.0.21",
+    "tmp": "^0.0.28",
+    "zip-folder": "^1.0.0",
+    "asyncawait": "^1.0.3"
+  },
+  "preferGlobal": true,
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "preferGlobal": true,
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/salsify/html-lambda-cli.git"
+  },
+  "keywords": [
+    "html",
+    "lambda",
+    "aws",
+    "amazon",
+    "salsify"
+  ],
+  "author": "Salsify",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/salsify/html-lambda-cli/issues"
+  },
+  "homepage": "https://github.com/salsify/html-lambda-cli#readme",
   "bin": {
     "html-lambda": "index.js"
-  },
-  "dependencies": {
-    "asyncawait": "^1.0.3",
-    "autoprefixer": "^6.3.6",
-    "aws-sdk": "^2.3.17",
-    "express": "^4.13.4",
-    "fs-extra": "^0.30.0",
-    "html-lambda-runner": "git+https://github.com/salsify/html-lambda-runner.git",
-    "node-sass": "^3.7.0",
-    "postcss": "^5.0.21",
-    "tmp": "0.0.28",
-    "zip-folder": "^1.0.0"
   }
 }
