@@ -4,6 +4,7 @@
   "description": "A simple command line interface for building HTML Lambda functions",
   "main": "index.js",
   "dependencies": {
+    "asyncawait": "^1.0.3",
     "autoprefixer": "^6.3.6",
     "aws-sdk": "^2.3.17",
     "colors": "^1.1.2",
@@ -12,9 +13,9 @@
     "html-lambda-runner": "^1.0.0",
     "node-sass": "^3.7.0",
     "postcss": "^5.0.21",
+    "q": "^1.4.1",
     "tmp": "^0.0.28",
-    "zip-folder": "^1.0.0",
-    "asyncawait": "^1.0.3"
+    "zip-folder": "^1.0.0"
   },
   "preferGlobal": true,
   "devDependencies": {},
